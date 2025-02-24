@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn Nihongo</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#intro">Introduction</a></li>
+                <li><a href="#buttons">Quizzes</a></li>
+                <li><a href="#footer">Footer</a></li>
+            </ul>
+            <button id="theme-toggle" aria-label="Toggle Dark/Light Mode">🌓</button>
+        </nav>
+        <section id="intro">
+            <h1>Welcome to Learn Nihongo</h1>
+            <p>Explore multiple quizzes to learn Japanese. Hope you have fun!</p>
+        </section>
+    </header>
+    <main>
+        <section id="buttons">
+            <h2>Interactive Quizzes</h2>
+            <div class="button-container">
+                <button onclick="showAlphabet()" aria-label="Show Alphabet Quizzes">Alphabet</button>
+                <button onclick="showCategories()" aria-label="Show Categories Quizzes">Categories</button>
+                <button onclick="showWords()" aria-label="Show Words Quizzes">Words</button>
+            </div>
+            <div id="loading" class="hidden">
+                <p>Loading quizzes...</p>
+            </div>
+            <div id="back-button" class="hidden">
+                <button onclick="hideContainers()">Back to Main</button>
+            </div>
+            <div id="alphabet-quizzes" class="button-container button-row hidden"></div>
+            <div id="categories-quizzes" class="button-container button-row hidden"></div>
+            <div id="words-quizzes" class="button-container button-row hidden"></div>
+        </section>
+        <section id="messages">
+            <p id="message1"></p>
+            <p id="message2"></p>
+            <p id="message3"></p>
+        </section>
+    </main>
+    <footer id="footer">
+        <p>&copy; 2025 Learn Nihongo. All rights reserved.</p>
+    </footer>
+    <script>
+        function showAlphabet() {
+            showLoading();
+            const container = document.getElementById('alphabet-quizzes');
+            setTimeout(() => {
+                toggleContainer(container, `
+                    <button onclick="changeText('message1')" aria-label="Hiragana Quiz">Hiragana Quiz</button>
+                    <button onclick="changeText('message2')" aria-label="Katakana Quiz">Katakana Quiz</button>
+                `);
+                hideLoading();
+            }, 1000); // Simulate loading delay
+        }
+
+        function showCategories() {
+            showLoading();
+            const container = document.getElementById('categories-quizzes');
+            setTimeout(() => {
+                toggleContainer(container, `
+                    <button onclick="alert('Colours Quiz Coming Soon!')" aria-label="Colours Quiz">Colours</button>
+                    <button onclick="alert('Verbs Quiz Coming Soon!')" aria-label="Verbs Quiz">Verbs</button>
+                    <button onclick="alert('Nouns Quiz Coming Soon!')" aria-label="Nouns Quiz">Nouns</button>
+                    <button onclick="alert('Particles Quiz Coming Soon!')" aria-label="Particles Quiz">Particles</button>
+                `);
+                hideLoading();
+            }, 1000); // Simulate loading delay
+        }
+
+        function showWords() {
+            showLoading();
+            const container = document.getElementById('words-quizzes');
+            setTimeout(() => {
+                toggleContainer(container, `
+                    <button onclick="changeText('message1')" aria-label="Hiragana Quiz">Hiragana Quiz</button>
+                    <button onclick="changeText('message2')" aria-label="Katakana Quiz">Katakana Quiz</button>
+                    <button onclick="changeText('message3')" aria-label="Kanji Quiz">Kanji Quiz</button>
+                `);
+                hideLoading();
+            }, 1000); // Simulate loading delay
+        }
+
+        function toggleContainer(container, content) {
+            hideContainers();
+            if (container.classList.contains('hidden')) {
+                container.innerHTML = content;
+                container.classList.remove('hidden');
+                document.getElementById('back-button').classList.remove('hidden');
+            } else {
+                container.classList.add('hidden');
+                document.getElementById('back-button').classList.add('hidden');
+            }
+        }
+
+        function hideContainers() {
+            document.getElementById('alphabet-quizzes').classList.add('hidden');
+            document.getElementById('categories-quizzes').classList.add('hidden');
+            document.getElementById('words-quizzes').classList.add('hidden');
+        }
+
+        function changeText(id) {
+            const messages = {
+                message1: "Let's practice Hiragana!",
+                message2: "Time to master Katakana!",
+                message3: "Ready to tackle Kanji?"
+            };
+            document.getElementById(id).textContent = messages[id];
+            hideContainers();
+        }
+
+        function showLoading() {
+            document.getElementById('loading').classList.remove('hidden');
+        }
+
+        function hideLoading() {
+            document.getElementById('loading').classList.add('hidden');
+        }
+
+        // Dark/Light Mode Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+        });
+    </script>
+</body>
+</html>
