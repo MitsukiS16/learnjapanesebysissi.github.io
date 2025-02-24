@@ -1,3 +1,3 @@
-﻿# Learn Japonese by sissi 
+﻿# Learn Japanese by sissi 
  
 learnjapanesebysissi.github.io
